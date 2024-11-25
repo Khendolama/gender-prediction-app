@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender App</title>
+    <style>
+        #div {
+            max-width: 500px;
+            margin: 40px auto;
+            background-color: #a69d9d;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px;
+        }
+
+        h1, h3 {
+            text-align: center;
+        }
+
+        #age, #month {
+            width: 90%;
+            padding: 7.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: blue;
+            padding: 7px 7px;
+            margin-left: 170px;
+            color: white;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button {
+            background-color: rgb(125, 232, 125);
+        }
+
+        button:active {
+            background-color: rgb(57, 136, 182);
+        }
+
+        #prediction {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        #genderMessage {
+            text-align: center;
+            padding: 15px;
+            font-style: italic;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="div">
+        <h1>Baby Gender Prediction</h1>
+        <h3>Enter Age and Month of Conception</h3>
+
+        <label for="age">Age at Conception(18-45)</label>
+        <input type="number" id="age" min="18" max="45" placeholder="age" required >
+        
+        <label for="month">Lunar Month of Conception (1-12)</label>
+        <input type="number" id="month" min="1" max="12" placeholder="month" required >
+       
+        <button onclick="predictGender()">Predict Gender</button>
+
+        <!-- it shows the Congratulations Message -->
+        <div id="prediction"></div> 
+
+        <!-- It shows the gender specific Message -->
+         <div id="genderMessage"></div>
+
+        <!-- It shows the Image -->
+        <div id="img"></div>
+
+    </div>
+
+    <script>
+        const genderChart = {
+            18: ['Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Girl', 'Boy', 'Girl', 'Boy'],
+            19: ['Girl', 'Boy', 'Girl', 'Girl', 'Boy', 'Girl', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Girl'],
+            20: ['Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Girl', 'Boy', 'Boy', 'Girl', 'Girl', 'Boy'],
+            21: ['Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Girl', 'Boy', 'Girl', 'Boy'],
+            22: ['Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Girl'],
+            23: ['Girl', 'Boy', 'Girl', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy'],
+            24: ['Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy'],
+            25: ['Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Girl'],
+            26: ['Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy'],
+            27: ['Girl', 'Boy', 'Girl', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy'],
+            28: ['Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy'],
+            29: ['Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy'],
+            30: ['Boy', 'Girl', 'Boy', 'Boy', 'Girl', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl', 'Boy', 'Girl']
+        };
+
+        function predictGender() {
+            const age = document.getElementById('age').value;
+            const month = document.getElementById('month').value;
+            const predictionDiv = document.getElementById('prediction');  // congratulations message
+            const genderMessageDiv = document.getElementById('genderMessage');  // gender-specific message
+            const imgDiv = document.getElementById('img');  // image
+
+            // Validate age and month inputs
+            if (isNaN(age) || isNaN(month) || age < 18 || age > 45 || month < 1 || month > 12) {
+                predictionDiv.innerHTML = 'Please enter valid age and month.';
+                genderMessageDiv.innerHTML = '';  // Clear gender message if inputs are invalid
+                imgDiv.innerHTML = '';  // Clear image
+                return;
+            }
+
+            // If age and month are valid
+            if (genderChart[age]) {
+                const gender = genderChart[age][month - 1];  // Get the gender based on age and month
+
+                // Clear previous messages and images
+                predictionDiv.innerHTML = '';  // Remove the previous congratulations message
+                genderMessageDiv.innerHTML = '';  // Clear gender-specific message
+                imgDiv.innerHTML = '';  // Clear previous image
+
+                // Set the congratulations message in PredictionDiv
+                predictionDiv.innerHTML = `Congratulations! You are having a baby ${gender}!`;
+
+                // Set the gender-specific message in GenderMessageDiv
+                let genderMessage = '';  // Initialize the variable for gender-specific message
+                let color = ''; // Initialize the color variable
+
+                if (gender === 'Boy') {
+                    genderMessage = 'Prepare for your little prince!';
+                    imgDiv.innerHTML = '<img src="images/boy.png" alt="Boy" style="width:100px;height:100px;">';  // Set image for boy
+                    color = 'blue';
+                }
+
+                if (gender === 'Girl') {
+                    genderMessage = 'Prepare for your little princess!';
+                    imgDiv.innerHTML = '<img src="images/girl.png" alt="Girl" style="width:100px;height:100px;">';  // Set image for girl
+                    color = 'purple';
+                }
+
+                // Display the gender-specific message in GenderMessageDiv
+                genderMessageDiv.innerHTML = genderMessage;
+                genderMessageDiv.style.color = color;
+            } else {
+                predictionDiv.innerHTML = 'Age not found.';
+                genderMessageDiv.innerHTML = '';  // Clear gender-specific message
+                imgDiv.innerHTML = '';  // Clear image
+            }
+        }
+
+    </script>
+</body>
+</html>
+
