@@ -24,4 +24,4 @@ To run this app locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/khendolama/gender-prediction-app.git
+   git clone https://github.com/Khendolama/gender-prediction-app.git
