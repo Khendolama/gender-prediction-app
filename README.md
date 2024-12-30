@@ -3,7 +3,7 @@
 This is a simple web application that predicts the gender of a baby based on the mother's age at conception and the lunar month of conception.
 
 ## Features
-- Enter the mother's age (between 18 and 45 years).
+- Enter the mother's age (between 18 and 30 years).
 - Select the lunar month of conception (between 1 and 12).
 - Get a prediction of the baby's gender (Boy or Girl).
 - Displays a gender-specific message along with an image of a boy or girl.
