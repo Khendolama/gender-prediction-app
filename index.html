@@ -6,9 +6,9 @@
     <title>Gender App</title>
     <style>
         #div {
-            max-width: 500px;
-            margin: 40px auto;
-            background-color: #a69d9d;
+            max-width: 300px;
+            margin: 50px auto;
+            background-color: #78c1a2;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px;
@@ -32,20 +32,20 @@
         }
 
         button {
-            background-color: blue;
-            padding: 7px 7px;
-            margin-left: 170px;
+            background-color: rgb(11, 63, 248);
+            padding: 5px 10px;
+            margin-left: 120px;
             color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 15px;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
+            
         }
 
-        button {
-            background-color: rgb(125, 232, 125);
+        .hover-button:hover {
+            background-color: green; /* Color when hovered */
         }
-
         button:active {
             background-color: rgb(57, 136, 182);
         }
@@ -75,13 +75,13 @@
         <h1>Baby Gender Prediction</h1>
         <h3>Enter Age and Month of Conception</h3>
 
-        <label for="age">Age at Conception(18-45)</label>
-        <input type="number" id="age" min="18" max="45" placeholder="age" required >
+        <label for="age">Age at Conception(18-30)</label>
+        <input type="number" id="age" min="18" max="30" placeholder="age" required >
         
-        <label for="month">Lunar Month of Conception (1-12)</label>
+        <label for="month">Month of Conception (1-12)</label>
         <input type="number" id="month" min="1" max="12" placeholder="month" required >
        
-        <button onclick="predictGender()">Predict Gender</button>
+        <button  class="hover-button" onclick="predictGender()">submit</button>
 
         <!-- it shows the Congratulations Message -->
         <div id="prediction"></div> 
@@ -119,7 +119,7 @@
             const imgDiv = document.getElementById('img');  // image
 
             // Validate age and month inputs
-            if (isNaN(age) || isNaN(month) || age < 18 || age > 45 || month < 1 || month > 12) {
+            if (isNaN(age) || isNaN(month) || age < 18 || age > 30 || month < 1 || month > 12) {
                 predictionDiv.innerHTML = 'Please enter valid age and month.';
                 genderMessageDiv.innerHTML = '';  // Clear gender message if inputs are invalid
                 imgDiv.innerHTML = '';  // Clear image
